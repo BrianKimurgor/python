@@ -12,9 +12,9 @@ client = MongoClient("mongodb://localhost:27017")
 db = client["your_database_name"]
 
 # Import routes
-from .routes import books, carparks, airports
+from .routes import books
 
 # Register blueprints
 app.register_blueprint(books.bp, url_prefix="/api/books")
-app.register_blueprint(carparks.bp, url_prefix="/api/carparks")
-app.register_blueprint(airports.bp, url_prefix="/api/airports")
+# app.register_blueprint(carparks.bp, url_prefix="/api/carparks")
+# app.register_blueprint(airports.bp, url_prefix="/api/airports")
