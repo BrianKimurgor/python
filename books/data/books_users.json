@@ -1,0 +1,402 @@
+[
+    {
+        "username": "rachelhall",
+        "password": "$2b$12$XtjwEq7mrEGrlGe.0qoF.OTFIUSW1SUx6RUAX0c24rGSiOd6p6MyO",
+        "admin": false
+    },
+    {
+        "username": "robertjohnson",
+        "password": "$2b$12$ODZTgsf63faC2X0lGmo/1uvLr9lCzO5vBSxjsRp4gVnh4qJMUDBHS",
+        "admin": true
+    },
+    {
+        "username": "kiaragutierrez",
+        "password": "$2b$12$FINo.6r6Rg/BHUTwPF3GGeoFgiSMRTcLxiELWYYrtYqvfir8trdeG",
+        "admin": true
+    },
+    {
+        "username": "wilsonelizabeth",
+        "password": "$2b$12$4W8ByQ3WHzNw/TmCTGgq9uea06EtuxH8WCTiGpF1buOb1qPnJTwW.",
+        "admin": false
+    },
+    {
+        "username": "alexanderjackson",
+        "password": "$2b$12$AinXKZIHYuZPbNW05atZX.ocK1BvJhSS0Mddjdzs19F8yV44C8A5q",
+        "admin": true
+    },
+    {
+        "username": "stevenwiley",
+        "password": "$2b$12$kXt8pYBn1R/M92s7xcJTU.jVcUUG9HU9GsbH.O.5ng9JUf5nuL/LW",
+        "admin": true
+    },
+    {
+        "username": "kochdavid",
+        "password": "$2b$12$7NE25kqNHiiqvnqPvbN6SOvhqY0Pup4IN5DzZejlDPB9VwORd/6Qi",
+        "admin": false
+    },
+    {
+        "username": "upearson",
+        "password": "$2b$12$9J4n08JUoK93zvsxLmI3k.6dltwX5riN9G0Bd2Zr1Nzw.GLT8gMvq",
+        "admin": true
+    },
+    {
+        "username": "riosjoshua",
+        "password": "$2b$12$1uAYvFiahsxj93Ii4rgYS.V9WBwAvoka9cxMbyS22sv3UMQaSky/i",
+        "admin": true
+    },
+    {
+        "username": "lpotts",
+        "password": "$2b$12$Auy8PUl6LF1xOApEmoQMLOIA.tT32cY/gS/ci6u/AjZ4DXy0SFEbS",
+        "admin": false
+    },
+    {
+        "username": "wmontes",
+        "password": "$2b$12$/SnBzrwd3Iqv0N1yjquHfuqKgzm14uPE9Zz93O3BX330clJITwDOO",
+        "admin": false
+    },
+    {
+        "username": "emily82",
+        "password": "$2b$12$UuV5qLDGXRUZsETA3cT0c.dpnorb0Czrf2FU3tl.wDP2A6oR5zk6q",
+        "admin": false
+    },
+    {
+        "username": "thomaskristen",
+        "password": "$2b$12$4Kjd.hfwl6Oa8tV0JFSUV.ChrOn8nb.rpz1jisbjjrk.SKMCn4rpG",
+        "admin": true
+    },
+    {
+        "username": "jennifer98",
+        "password": "$2b$12$obn4yZEoARZyH9NVKi9CNuDwpYqsJ7Q/wVzI6X8iaNACY337soevO",
+        "admin": false
+    },
+    {
+        "username": "charleschristensen",
+        "password": "$2b$12$OnTxOxN9c/OOpl5Y2NnyH.qAnAedfHlHAWFDtUB0sHiAphyBxr5Uq",
+        "admin": false
+    },
+    {
+        "username": "susanhernandez",
+        "password": "$2b$12$KAV7VnkIzVyh7wkyIxlhyOf85Yy/EuRAaGZu1UwrnfomPEoZR5V22",
+        "admin": false
+    },
+    {
+        "username": "pamelarasmussen",
+        "password": "$2b$12$MBtPjDIx5wiJJCO0woiGu.b1mlQ9pr/wNNwrc40u52jJ5e5eDouLi",
+        "admin": true
+    },
+    {
+        "username": "whiteheaddavid",
+        "password": "$2b$12$K3d/GbIm55BbqKvvH6LNl..UWN8G.USGxf40kF/n45MrowynT34Bq",
+        "admin": true
+    },
+    {
+        "username": "kylesmith",
+        "password": "$2b$12$pCDQXl8F6P8yiiy9J4iQ9.gZpc6ch5xJYTkbLcm6ZuhXvgy7nu6Qi",
+        "admin": false
+    },
+    {
+        "username": "gmiranda",
+        "password": "$2b$12$RsveHnva5n3k0dRudtIVyullilP4/8OzQrXihwjKEWzk8ESgW9IBi",
+        "admin": false
+    },
+    {
+        "username": "jenniferramsey",
+        "password": "$2b$12$hpR.hz0uFdfFKmTf1sgv8Ol/A/onZoeLeNcKLZCRmDfAmaqpe0Sg6",
+        "admin": true
+    },
+    {
+        "username": "james98",
+        "password": "$2b$12$kca0mP6lUE4mxYR4WQ0wYeyb01HZGXT9JObfpLGXXDScPCVr7wZoa",
+        "admin": true
+    },
+    {
+        "username": "nicole87",
+        "password": "$2b$12$SHMQhC5ZfhjPi4O0wMVXVewZ/5sFMTPRcqSqWaAJXlWmTSCNw4V4C",
+        "admin": false
+    },
+    {
+        "username": "dbrown",
+        "password": "$2b$12$V1PdV63PJ7uxJVkBSo5mG.qrepzk1EACTHLZmMTU.Gw3995Zvnmg6",
+        "admin": true
+    },
+    {
+        "username": "elizabeth26",
+        "password": "$2b$12$kCuXTReUja4AuIPBvexVbORvpFJBRPYJ68YwtEXPlg2xIj8arUQVS",
+        "admin": false
+    },
+    {
+        "username": "mtaylor",
+        "password": "$2b$12$YYujWTPSiKi9J8OabAqmV.k.wlNU5BUIU0oCkIbxKIP9/clBOQNX6",
+        "admin": true
+    },
+    {
+        "username": "danielbowman",
+        "password": "$2b$12$pW.mNxrFj9cccyGPj3Cr8OjFsdVm/GinScNTMSXUD7jgcC2T4wAh6",
+        "admin": false
+    },
+    {
+        "username": "lecraig",
+        "password": "$2b$12$ieILSDDXhUdI61HVpzzGeOslge5ikT.qdRlGVBiXF.1ectuJZ/MCa",
+        "admin": true
+    },
+    {
+        "username": "smithkristin",
+        "password": "$2b$12$E7Ewl0aVpTItOgQRYX6n5eyllgFgCIFiFS4t2u9yQrthkitBvctM6",
+        "admin": true
+    },
+    {
+        "username": "heather56",
+        "password": "$2b$12$7.yXg19SBa1y2d9nOP8CceomcVoCly2ywopcLmwWuk39NrDMEQftm",
+        "admin": true
+    },
+    {
+        "username": "rebeccawilliams",
+        "password": "$2b$12$vyYxpo5NhulYg7YKoXbXi.rFxHqJKsNt8nu/X4oD5EPdJOy0LzknO",
+        "admin": false
+    },
+    {
+        "username": "jasmine19",
+        "password": "$2b$12$ORKYGor7oJfrViKz0OWGk.RKMPHchotJAR/JvPHNJWAhyCBkFFFo6",
+        "admin": false
+    },
+    {
+        "username": "keith82",
+        "password": "$2b$12$dNvhYf3HPnlUa0a9JoXgOOIwZdPUFu.Me8IddZP9d2Zy8EYbSP2y6",
+        "admin": true
+    },
+    {
+        "username": "justinpena",
+        "password": "$2b$12$J2yLaxWhvFtnfxjcSTpJoOgNPcb1SAi9RELuXNZ4gFCDJc4jki/MG",
+        "admin": true
+    },
+    {
+        "username": "reidalexander",
+        "password": "$2b$12$DYKrxxkf8f.M0fz57sjzWe1nyYEJGzCxXnbr26yJHVE8eiWussHEG",
+        "admin": true
+    },
+    {
+        "username": "qwhite",
+        "password": "$2b$12$Lvx8eil2ml7q/5n6p/4hju1j037QDEdlFF4Vw1G.cnySUXAGXECF2",
+        "admin": false
+    },
+    {
+        "username": "npierce",
+        "password": "$2b$12$.9i7f2Aow3F6Aoc3uOVdzOxrCy6zMmqz.8hL0CCdvEFjCMCxJKjhO",
+        "admin": false
+    },
+    {
+        "username": "douglas37",
+        "password": "$2b$12$K2Y1MWoOwsOksNYsJBq/V.vFOCqoqzpW4nK508EYGDGz.LNRr4IOK",
+        "admin": false
+    },
+    {
+        "username": "johnsonjerry",
+        "password": "$2b$12$00QT8hguRWdUO6itFEPO2eVUHlRIzrAJLtJ9mcYFu/LTsJYzwBDV2",
+        "admin": false
+    },
+    {
+        "username": "clayton30",
+        "password": "$2b$12$NRvRdLUJJ.d32LzWxL6Fa.iwb57PftL1KEHSPW4sGz9.oN6cCVckK",
+        "admin": false
+    },
+    {
+        "username": "rwilliams",
+        "password": "$2b$12$JzD89ORRLZ7HBrcLUQ5hJejlfHhP.Jj0Jmf/fn2lhkGas4CyKHOKS",
+        "admin": true
+    },
+    {
+        "username": "daviskatrina",
+        "password": "$2b$12$j7lK451dnwNTEPdL5YzdL.iPAYnzMiDIY6p9WFKgKUP7taYGhOEqK",
+        "admin": true
+    },
+    {
+        "username": "jensenkathryn",
+        "password": "$2b$12$he2mzA4.nTygq.2EeAzc6uQbDxSok9EfZBrQRww/fXiZ1/F.WvzCm",
+        "admin": false
+    },
+    {
+        "username": "heathervargas",
+        "password": "$2b$12$0.INW5eGvVOgb0Ql40LGQu2BIqkutcKZbB5jZv.ylRsa3R4NYDNiC",
+        "admin": true
+    },
+    {
+        "username": "smithdonna",
+        "password": "$2b$12$XKMljJ3aKcO0TavGQ2cQ6O2QkLyb1yJFO7oOo43Gs0c8p2YoRlCTu",
+        "admin": false
+    },
+    {
+        "username": "donaldhall",
+        "password": "$2b$12$ykngBxMXycf9lbSw/C4aiuLOrjERwWc/83kj7MgsdaDJ8i6FWVM8q",
+        "admin": false
+    },
+    {
+        "username": "torresgabriella",
+        "password": "$2b$12$HcRqOw0t3j6BcG9g4rrYfOSSxdRW7FMTJ07m8GXgB/JZe1e/EiTKe",
+        "admin": true
+    },
+    {
+        "username": "amyrichards",
+        "password": "$2b$12$2fAyjSz2viNfCPatjt3TfeuvumhwCEjUHJyhZbEGK.KY6Owa.rqum",
+        "admin": true
+    },
+    {
+        "username": "bstevens",
+        "password": "$2b$12$3oWs6bLqhQ7UjjD.YG1tkemd1/3R1TfXeCvhKEPNrrIDDIwwmBEvO",
+        "admin": true
+    },
+    {
+        "username": "bradshawkathleen",
+        "password": "$2b$12$G0C0veXE4mz6DQD/BZKSheuPARBXAd..DvaqaLDK7bKHUb4tAiOcC",
+        "admin": true
+    },
+    {
+        "username": "youngjason",
+        "password": "$2b$12$to8zZuf6Z6Fa.gbmgTf9j.OBCC0LN7ND9e78kffl1nu9/IZqIJT/i",
+        "admin": true
+    },
+    {
+        "username": "amy72",
+        "password": "$2b$12$6RJXjNKbsk0T1HoU.5pc6OQBnLPZUDQF/gj7EgDcl3T1JH9cSDXaS",
+        "admin": false
+    },
+    {
+        "username": "tperez",
+        "password": "$2b$12$sITw7NT4mvmnbUnqXB8DweRKBR0kTkMu8moO5W/P3saELxqNiV5Iu",
+        "admin": true
+    },
+    {
+        "username": "vargascrystal",
+        "password": "$2b$12$wrnjHpYe.vj2tn/7UDMgM.gDGKaYij37naXxdgedOL3gsZMQi7G3a",
+        "admin": false
+    },
+    {
+        "username": "kvargas",
+        "password": "$2b$12$XYd2LvoeFGs8e6V4L1195uC2ksGvqfYI52K/HC5QCCsAOmyOPlVC2",
+        "admin": true
+    },
+    {
+        "username": "xblair",
+        "password": "$2b$12$mukuEVBG9fOJY7fwGCJLmuhRH9sp0bOURCKqZSxkyT94OnFpROWcy",
+        "admin": true
+    },
+    {
+        "username": "robinsondonna",
+        "password": "$2b$12$J/mS2Hf8T0tGhnNMaSI3BeyVrxGsfT5545UCxrCZfMSQZ8Q.PLdqK",
+        "admin": false
+    },
+    {
+        "username": "erice",
+        "password": "$2b$12$RLhxRV8d8FlEuqGlV8LWpupDsOD6vxpmzNKphH5hf6SQHqqbi.8pu",
+        "admin": false
+    },
+    {
+        "username": "lauraabbott",
+        "password": "$2b$12$70J6jLvCQe88M6SpDlNr2O.ay7lzEEHiqlF7a.WwGYeQsiW9lvkv.",
+        "admin": false
+    },
+    {
+        "username": "olutz",
+        "password": "$2b$12$4bqSds0BHG5Fux4Yx69ULOKey/lewZWyriByLsm1jM4irk8g.b6Z6",
+        "admin": true
+    },
+    {
+        "username": "mburke",
+        "password": "$2b$12$MGB8DwFq2oT1MQT2GoOzsuxrsxVCw9YYN3r6b.dDFR3ovA8hI.ctW",
+        "admin": true
+    },
+    {
+        "username": "karenmatthews",
+        "password": "$2b$12$E0w.jlTY94kMvTHGctgjzOp9tgyxj6HDXxdF0EqZwL9Jq37thfQFK",
+        "admin": true
+    },
+    {
+        "username": "longjose",
+        "password": "$2b$12$BrJxBloTf6AImJd8cvc8b.0.1wsMvDh0hGTV9mbSxtalHqxwfThXO",
+        "admin": true
+    },
+    {
+        "username": "romangregory",
+        "password": "$2b$12$Dt7VqwnzaKV3nTZvKh4nIepM3Vs2RfiqCOHoBrDJaBBoKcrDdzpiu",
+        "admin": false
+    },
+    {
+        "username": "cummingsleslie",
+        "password": "$2b$12$.bk54tH990lE9fwu5z6u/eCCj3K4piMRWM1xKHWy4D0jp9ODqWUDC",
+        "admin": true
+    },
+    {
+        "username": "aterry",
+        "password": "$2b$12$OBDXNAqxrkpTCSKyAmQ4Su51S6kCHTG.dxJveo.hbs05OsD7lAwdq",
+        "admin": true
+    },
+    {
+        "username": "charles59",
+        "password": "$2b$12$2caT3B5LK1fzyBufKRciUuou6.mZyN0AiFuyNDlcZQAK55dMzQm8u",
+        "admin": true
+    },
+    {
+        "username": "boyderic",
+        "password": "$2b$12$mREyzaGInQcWRPihjwwQPeFMJmwV3KbbFFWTAOsACwJ3Zit8LgC3q",
+        "admin": false
+    },
+    {
+        "username": "emosley",
+        "password": "$2b$12$lbudmBObnbtMwJmoXrznxOOKsYPOuQKkqSD/shUhcK2ZANcSBXH.S",
+        "admin": false
+    },
+    {
+        "username": "uwilliams",
+        "password": "$2b$12$bjvRx175ddcD8z.LcA0myu.8uLnF5YLQHiUb75fITlWTCfS6OWpzK",
+        "admin": true
+    },
+    {
+        "username": "jasonmorrison",
+        "password": "$2b$12$FDKGX3loU2vd452ZEbeooOS.ayDM8QrVXqevCARY77AN5mM.2Ra7S",
+        "admin": true
+    },
+    {
+        "username": "jasonolson",
+        "password": "$2b$12$R6J.ILrqQh6jQGjXyarLguJXkvp1XCxbf88BUb2HD2BpIAll0cHKK",
+        "admin": false
+    },
+    {
+        "username": "barrykenneth",
+        "password": "$2b$12$N6MERu7uEqKNS4APF9svQuy/BovNE0tqAKbYv1MTPx4uyuhq7ZAH2",
+        "admin": true
+    },
+    {
+        "username": "bridgessarah",
+        "password": "$2b$12$P1o9rtjWW3yaRCjRK5XFOuGkgxElLiaemanfMOaapvUzBTqKuP2R2",
+        "admin": false
+    },
+    {
+        "username": "mjohnson",
+        "password": "$2b$12$MTD8Z9FXjtdI.91grqBH6uyDCPOEFhJYAQYkVZKm.UZZDBBQDJF2q",
+        "admin": true
+    },
+    {
+        "username": "alexandra36",
+        "password": "$2b$12$ttSjlQ3cWe/.iOWBxRPfLOtwAOeh/sTIVy3.M3esabsXCe6BqmhPK",
+        "admin": false
+    },
+    {
+        "username": "justin46",
+        "password": "$2b$12$eoR/WKWqpTy1SR08htjJE.Ya2zaRFmrcZ1lz0LCRi4jXLhfkNSj5W",
+        "admin": false
+    },
+    {
+        "username": "coltonnelson",
+        "password": "$2b$12$rJwwsFk7PSm28EuXF1nCZ.gJAeDIntnJ5ejNj.rxs3ZeUYndARi.G",
+        "admin": true
+    },
+    {
+        "username": "eburton",
+        "password": "$2b$12$1SVQSawCje7l5Jw.o7RayO6dGKAOI0cSO7BqDpZM8X2i9Cy7sxyvq",
+        "admin": false
+    },
+    {
+        "username": "catherine30",
+        "password": "$2b$12$PfeEJSsU8F62A5py9O.kl.WxV2FVaE90o8vy5zj.EEfBRzVF7oNI2",
+        "admin": true
+    }
+]
