@@ -14,6 +14,7 @@ db = client["your_database_name"]
 # Import routes
 from app.routes.books import books
 
+
 # Register blueprints
 app.register_blueprint(books, url_prefix="/api/books")
 
