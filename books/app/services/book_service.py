@@ -1,4 +1,5 @@
 from models.book import Book, Author, Publisher
+from bson import ObjectId
 
 def create_book(data):
     author = Author(**data['author'])
@@ -20,7 +21,14 @@ def create_book(data):
     return book
 
 def get_books():
-    return Book.objects()
+    books = Book.objects()
+    books_list = []
+    for boo in books:
+        # Convert the ObjectId to a string
+        book_dict = boo.to_mongo().to_dict()
+        book_dict['_id'] = str(book_dict['_id'])  # Ensure _id is a string
+        books_list.append(book_dict)
+    return books_list
 
 def update_book(book_id, data):
     book = Book.objects(id=book_id).first()

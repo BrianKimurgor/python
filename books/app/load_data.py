@@ -4,7 +4,7 @@ from app.models.book import Book, Author, Publisher, Rating, Review  # Import Bo
 from app.models.user import User  # Import User model
 
 # Connect to MongoDB
-connect("boos_db")  # Replace with your database name
+connect("bookstore_db")  # Replace with your database name
 
 def load_json_data():
     # Load data from JSON files
