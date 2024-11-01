@@ -2,7 +2,8 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from mongoengine import connect
 from app.config import Config
-
+from app.routes.user_route import user_bp
+from app.routes.carpark_route import carpark_bp
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -17,11 +18,14 @@ connect(
 # Initialize JWT manager
 jwt = JWTManager(app)
 
+# Register blueprints
+app.register_blueprint(user_bp, url_prefix='/api')
+app.register_blueprint(carpark_bp, url_prefix='/api')
 
 # Home route
 @app.route("/")
 def home():
-    return {"message": "Welcome to the Carpark API"}, 200
+    return {"message": "Welcome to the carpark API"}, 200
 
 # Run the application
 if __name__ == "__main__":
