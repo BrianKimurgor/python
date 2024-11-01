@@ -1,20 +1,26 @@
-# app.py
 from flask import Flask
 from flask_jwt_extended import JWTManager
-from pymongo import MongoClient
+from mongoengine import connect
 from app.config import Config
+from app.routes.user_route import user_bp
+from app.routes.airport_route import airport_bp
 
 # Initialize Flask app
 app = Flask(__name__)
 app.config.from_object(Config)
 
-# Initialize MongoDB client
-mongo_client = MongoClient(app.config["MONGO_URI"])
-db = mongo_client.get_database()  # Get the default database from the URI
+# Initialize MongoEngine connection
+connect(
+    db=app.config["MONGO_DBNAME"],   # Database name
+    host=app.config["MONGO_URI"]     # MongoDB URI
+)
 
 # Initialize JWT manager
 jwt = JWTManager(app)
 
+# Register blueprints
+app.register_blueprint(user_bp, url_prefix='/api')
+app.register_blueprint(airport_bp, url_prefix='/api')
 
 # Home route
 @app.route("/")
