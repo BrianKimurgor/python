@@ -1,13 +1,17 @@
 from flask import Blueprint, jsonify, request
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt
 from app.models.airport import Airport
 
 airport_bp = Blueprint('airport_bp', __name__)
 
-# Add a new airport
+# Add a new airport (admin only)
 @airport_bp.route('/airports', methods=['POST'])
 @jwt_required()
 def add_airport():
+    claims = get_jwt()
+    if claims.get("role") != "admin":
+        return jsonify({"error": "Admin access required"}), 403
+
     data = request.get_json()
     
     # Create a new airport instance
@@ -36,10 +40,14 @@ def get_airports():
         'facilities': airport.facilities
     } for airport in airports]), 200
 
-# Update an airport by ID
+# Update an airport by ID (admin only)
 @airport_bp.route('/airports/<id>', methods=['PUT'])
 @jwt_required()
 def update_airport(id):
+    claims = get_jwt()
+    if claims.get("role") != "admin":
+        return jsonify({"error": "Admin access required"}), 403
+
     data = request.get_json()
     
     # Find the airport by ID and update fields
@@ -50,10 +58,14 @@ def update_airport(id):
     airport.update(**data)  # Update with provided data fields
     return jsonify({"message": "Airport updated successfully"}), 200
 
-# Delete an airport by ID
+# Delete an airport by ID (admin only)
 @airport_bp.route('/airports/<id>', methods=['DELETE'])
 @jwt_required()
 def delete_airport(id):
+    claims = get_jwt()
+    if claims.get("role") != "admin":
+        return jsonify({"error": "Admin access required"}), 403
+
     airport = Airport.objects(id=id).first()
     if not airport:
         return jsonify({"error": "Airport not found"}), 404
