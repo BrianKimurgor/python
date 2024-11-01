@@ -26,7 +26,7 @@ def load_data():
             if db.carparks.find_one({"code": carpark["name"]}):
                 print(f"Airport with code {carpark['name']} already exists. Skipping.")
                 continue
-            carpark["_id"] = ObjectId()  # Generate a new ObjectId for each airport
+            carpark["_id"] = ObjectId()  # Generate a new ObjectId for each carpark
             carpark.pop("id", None)  # Remove the UUID 'id' field
             db.carparks.insert_one(carpark)
 
