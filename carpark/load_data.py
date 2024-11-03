@@ -2,13 +2,24 @@ import json
 from bson import ObjectId
 from werkzeug.security import generate_password_hash
 from pymongo import MongoClient
+import os
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client.carpark_db
 
 def load_data():
-    # Load users
-    with open("data/carpark_users.json") as f:
+    """
+    Load user and carpark data from JSON files into the database.
+
+    This function performs the following operations:
+    - Loads user data from 'data/carpark_users.json' and inserts it into the 'users' collection
+        in the database. If a user with the same username already exists, it skips that user.
+    - Loads carpark data from 'data/carparks.json' and inserts it into the 'carparks' collection
+        in the database. If a carpark with the same code already exists, it skips that carpark.
+        Each carpark is assigned a new ObjectId, and the original UUID 'id' field is removed.
+    """
+    file_path = os.path.join(os.path.dirname(__file__), "data/carpark_users.json")
+    with open(file_path) as f:
         users = json.load(f)["carpark_users"]
         for user in users:
             # Check if the user already exists
@@ -19,7 +30,8 @@ def load_data():
             db.users.insert_one(user)
     
     # Load carpark with ObjectId conversion
-    with open("data/carparks.json") as f:
+    file_path = os.path.join(os.path.dirname(__file__), "data/carparks.json")
+    with open(file_path) as f:
         carparks = json.load(f)["carparks"]
         for carpark in carparks:
             # Check if carpark with the same code already exists

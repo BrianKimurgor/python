@@ -8,6 +8,21 @@ user_bp = Blueprint('user_bp', __name__)
 # Register a new user
 @user_bp.route('/auth/register', methods=['POST'])
 def register_user():
+    """
+    Registers a new user with the provided username and password.
+    
+    Expects a JSON payload with the following structure:
+    {
+        "username": "desired_username",
+        "password": "desired_password",
+        "admin": false  # Optional, defaults to False
+    }
+    
+    Returns:
+        A JSON response indicating success or failure:
+        - On success: {"message": "User registered successfully"}, HTTP status 201
+        - On failure: {"error": "User already exists"}, HTTP status 400
+    """
     data = request.get_json()
     username = data['username']
     password = data['password']
@@ -27,6 +42,18 @@ def register_user():
 # Login endpoint
 @user_bp.route('/auth/login', methods=['POST'])
 def login_user():
+    """
+    Authenticates a user based on the provided username and password.
+
+    Retrieves JSON data from the request, checks if a user with the given
+    username exists, and verifies the password. If authentication is successful,
+    an access token is generated and returned. Otherwise, an error message is returned.
+
+    Returns:
+        tuple: A JSON response containing the access token and a status code of 200
+            if authentication is successful, or an error message and a status code
+            of 401 if authentication fails.
+    """
     data = request.get_json()
     user = User.objects(username=data['username']).first()
     
