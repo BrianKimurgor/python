@@ -61,7 +61,7 @@ def update_carpark(id):
 # Delete an carpark by ID (admin only)
 @carpark_bp.route('/carparks/<id>', methods=['DELETE'])
 @jwt_required()
-def delete_airport(id):
+def delete_carpark(id):
     claims = get_jwt()
     if claims.get("role") != "admin":
         return jsonify({"error": "Admin access required"}), 403

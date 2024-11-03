@@ -2,13 +2,15 @@ import json
 from bson import ObjectId
 from werkzeug.security import generate_password_hash
 from pymongo import MongoClient
+import os
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client.airport_app
 
 def load_data():
     # Load users
-    with open("data/airport_users.json") as f:
+    file_path = os.path.join(os.path.dirname(__file__), "data/airport_users.json")
+    with open(file_path) as f:
         users = json.load(f)["airport_users"]
         for user in users:
             # Check if the user already exists
@@ -19,7 +21,8 @@ def load_data():
             db.users.insert_one(user)
     
     # Load airports with ObjectId conversion
-    with open("data/airports.json") as f:
+    file_path = os.path.join(os.path.dirname(__file__), "data/airports.json")
+    with open(file_path) as f:
         airports = json.load(f)["airports"]
         for airport in airports:
             # Check if an airport with the same code already exists
