@@ -5,7 +5,6 @@ A Flask-based API for managing airport data, including user authentication and r
 ## Table of Contents
 - [Features](#features)
 - [Installation](#installation)
-- [Configuration](#configuration)
 - [Endpoints](#endpoints)
   - [Authentication](#authentication)
   - [Airports](#airports)
@@ -25,8 +24,9 @@ A Flask-based API for managing airport data, including user authentication and r
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/airport-management-api.git
-   cd airport-management-api
+   git clone https://github.com/BrianKimurgor/python
+   cd python
+   cd airport
 
 2. **Install dependencies**:
     ```bash
@@ -37,6 +37,10 @@ A Flask-based API for managing airport data, including user authentication and r
 4. **Load initial data**:
     ```bash
     python3 load_data.py or python load_data.py depending with the python you are using
+
+**Initialize the app(run the app)**:
+    ```bash
+    python3 app.py or python app.py
 
 ## Endpoints
 
