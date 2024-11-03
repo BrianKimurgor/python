@@ -170,20 +170,23 @@ The `users` collection stores user data with admin status for access control.
   "password": "hashed_password",
   "admin": true
 }
+```
+
 
 ## Airports
 
 The  `airports` collection stores airport information.
 
 ```json
-{
-  "name": "Marciaton International Airport",
-  "location": "Amberside",
-  "code": "VKN",
-  "gates": 92,
-  "terminals": 5,
-  "facilities": ["Car Rental", "Free Wi-Fi", "VIP Lounge"]
-}
+    {
+    "name": "Marciaton International Airport",
+    "location": "Amberside",
+    "code": "VKN",
+    "gates": 92,
+    "terminals": 5,
+    "facilities": ["Car Rental", "Free Wi-Fi", "VIP Lounge"]
+    }
+```
 
 ## Security
 
@@ -193,7 +196,7 @@ Role-Based Access Control: Admin-only restrictions prevent unauthorized access t
 
 ## Technologies Used
 
-Backend: Flask
-Database: MongoDB
-Authentication: Flask-JWT-Extended
-Password Hashing: Werkzeug
+- **Backend**: Flask
+- **Database**: MongoDB
+- **Authentication**: Flask-JWT-Extended
+- **Password Hashing**: Werkzeug
