@@ -11,17 +11,15 @@ def register_user():
     """
     Registers a new user with the provided username and password.
     
-    Expects a JSON payload with the following structure:
-    {
-        "username": "desired_username",
-        "password": "desired_password",
-        "admin": false  # Optional, defaults to False
-    }
-    
+    This function retrieves user data from a JSON request, checks if a user with the given
+    username already exists, and if not, creates a new user with the specified username and
+    password. The password is hashed before being saved. An optional 'admin' flag can be
+    included in the request to set the user's admin status.
+
     Returns:
-        A JSON response indicating success or failure:
-        - On success: {"message": "User registered successfully"}, HTTP status 201
-        - On failure: {"error": "User already exists"}, HTTP status 400
+        Response: A JSON response indicating success or failure of the registration process.
+        - On success: {"message": "User registered successfully"}, HTTP status code 201.
+        - On failure: {"error": "User already exists"}, HTTP status code 400.
     """
     data = request.get_json()
     username = data['username']
@@ -43,23 +41,24 @@ def register_user():
 @user_bp.route('/auth/login', methods=['POST'])
 def login_user():
     """
-    Authenticates a user based on the provided username and password.
+    Authenticates a user based on provided JSON credentials and returns an access token if successful.
 
-    Retrieves JSON data from the request, checks if a user with the given
-    username exists, and verifies the password. If authentication is successful,
-    an access token is generated and returned. Otherwise, an error message is returned.
+    Expects a JSON payload with 'username' and 'password' fields.
+    If the user exists and the password is correct, an access token is generated and returned.
+    If authentication fails, an error message is returned.
 
     Returns:
-        tuple: A JSON response containing the access token and a status code of 200
-            if authentication is successful, or an error message and a status code
-            of 401 if authentication fails.
+        tuple: A JSON response containing either an access token with a 200 status code,
+                or an error message with a 401 status code.
     """
     data = request.get_json()
     user = User.objects(username=data['username']).first()
     
     # Check if the user exists and password is correct
     if user and user.check_password(data['password']):
-        access_token = create_access_token(identity=str(user.id))
+        # Include 'role' in the JWT claims based on admin status
+        additional_claims = {"role": "admin"} if user.admin else {"role": "user"}
+        access_token = create_access_token(identity=str(user.id), additional_claims=additional_claims)
         return jsonify(access_token=access_token), 200
     
     return jsonify({"error": "Invalid credentials"}), 401

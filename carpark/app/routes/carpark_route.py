@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt
 from app.models.carpark import Carpark
 
-carpark_bp = Blueprint('airport_bp', __name__)
+carpark_bp = Blueprint('carpark_bp', __name__)
 
 # Add a new carpark (admin only)
 @carpark_bp.route('/carparks', methods=['POST'])
@@ -25,18 +25,21 @@ def add_carpark():
         return jsonify({"error": "Admin access required"}), 403
 
     data = request.get_json()
-    
-    # Create a new carpark instance
-    carpark = Carpark(
-        name=data['name'],
-        location=data['location'],
-        totalSpaces=data['totalSpaces'],
-        availableSpaces=data['availableSpaces'],
-        ratePerHour=data['ratePerHour'],
-        facilities=data['facilities']
-    )
-    carpark.save()  # Save the carpark to the database
-    return jsonify({"message": "carpark added successfully"}), 201
+
+    try:
+        # Create a new carpark instance
+        carpark = Carpark(
+            name=data['name'],
+            location=data['location'],
+            totalSpaces=data['totalSpaces'],
+            availableSpaces=data['availableSpaces'],
+            ratePerHour=data['ratePerHour'],
+            facilities=data['facilities']
+        )
+        carpark.save()  # Save the carpark to the database
+        return jsonify({"message": "Carpark added successfully"}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # Retrieve all carparks
 @carpark_bp.route('/carparks', methods=['GET'])
@@ -60,18 +63,21 @@ def get_carparks():
         - A JSON response with a list of carpark details.
         - An HTTP status code 200 indicating the request was successful.
     """
-    carparks = Carpark.objects()
-    return jsonify([{
-        'id': str(carpark.id),
-        'name': carpark.name,
-        'location': carpark.location,
-        'totalSpaces': carpark.totalSpaces,
-        'availableSpaces': carpark.availableSpaces,
-        'ratePerHour': carpark.ratePerHour,
-        'facilities': carpark.facilities
-    } for carpark in carparks]), 200
+    try:
+        carparks = Carpark.objects()
+        return jsonify([{
+            'id': str(carpark.id),
+            'name': carpark.name,
+            'location': carpark.location,
+            'totalSpaces': carpark.totalSpaces,
+            'availableSpaces': carpark.availableSpaces,
+            'ratePerHour': carpark.ratePerHour,
+            'facilities': carpark.facilities
+        } for carpark in carparks]), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-# Update an carpark by ID (admin only)
+# Update a carpark by ID (admin only)
 @carpark_bp.route('/carparks/<id>', methods=['PUT'])
 @jwt_required()
 def update_carpark(id):
@@ -96,16 +102,19 @@ def update_carpark(id):
         return jsonify({"error": "Admin access required"}), 403
 
     data = request.get_json()
-    
-    # Find the carpark by ID and update fields
-    carpark = Carpark.objects(id=id).first()
-    if not carpark:
-        return jsonify({"error": "carpark not found"}), 404
-    
-    carpark.update(**data)  # Update with provided data fields
-    return jsonify({"message": "Carpark updated successfully"}), 200
 
-# Delete an carpark by ID (admin only)
+    try:
+        # Find the carpark by ID and update fields
+        carpark = Carpark.objects(id=id).first()
+        if not carpark:
+            return jsonify({"error": "Carpark not found"}), 404
+        
+        carpark.update(**data)  # Update with provided data fields
+        return jsonify({"message": "Carpark updated successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# Delete a carpark by ID (admin only)
 @carpark_bp.route('/carparks/<id>', methods=['DELETE'])
 @jwt_required()
 def delete_carpark(id):
@@ -128,18 +137,21 @@ def delete_carpark(id):
     if claims.get("role") != "admin":
         return jsonify({"error": "Admin access required"}), 403
 
-    carpark = Carpark.objects(id=id).first()
-    if not carpark:
-        return jsonify({"error": "Carpark not found"}), 404
-    
-    carpark.delete()
-    return jsonify({"message": "Carpark deleted successfully"}), 200
+    try:
+        carpark = Carpark.objects(id=id).first()
+        if not carpark:
+            return jsonify({"error": "Carpark not found"}), 404
+        
+        carpark.delete()
+        return jsonify({"message": "Carpark deleted successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # Search for carparks by location or facility
 @carpark_bp.route('/carparks/search', methods=['GET'])
-def search_airports():
+def search_carparks():
     """
-    Searches for airports based on location and facility parameters provided in the request.
+    Searches for carparks based on location and facility parameters provided in the request.
     
     Retrieves 'location' and 'facility' from the request arguments and constructs a query
     to filter Carpark objects. Returns a JSON response containing a list of carparks that
@@ -157,14 +169,17 @@ def search_airports():
         query['location'] = location
     if facility:
         query['facilities'] = facility
-    
-    carparks = Carpark.objects(**query)
-    return jsonify([{
-        'id': str(carpark.id),
-        'name': carpark.name,
-        'location': carpark.location,
-        'totalSpaces': carpark.code,
-        'gates': carpark.gates,
-        'terminals': carpark.terminals,
-        'facilities': carpark.facilities
-    } for carpark in carparks]), 200
+
+    try:
+        carparks = Carpark.objects(**query)
+        return jsonify([{
+            'id': str(carpark.id),
+            'name': carpark.name,
+            'location': carpark.location,
+            'totalSpaces': carpark.totalSpaces,
+            'availableSpaces': carpark.availableSpaces,
+            'ratePerHour': carpark.ratePerHour,
+            'facilities': carpark.facilities
+        } for carpark in carparks]), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
