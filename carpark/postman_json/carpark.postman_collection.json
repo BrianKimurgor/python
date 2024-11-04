@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "06df0ff9-1a6c-47a2-98dd-84f64122fb1f",
+		"name": "carpark",
+		"description": "The `carpark` collection provides a set of endpoints for managing car parking facilities in the system. The endpoints allow users to retrieve information about available car parks, add new car parks, update details of existing car parks, and delete car parks. Each endpoint requires authorization with a Bearer Token to ensure secure access.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19082081",
+		"_collection_link": "https://orange-trinity-975187.postman.co/workspace/Flask-API~9f5fab2d-9491-477c-aace-9ba8ece60d22/collection/19082081-06df0ff9-1a6c-47a2-98dd-84f64122fb1f?action=share&source=collection_link&creator=19082081"
+	},
+	"item": [
+		{
+			"name": "get-car-parks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains a list of carparks\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Carpark objects contain expected properties\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    if (jsonData.length > 0) {\r",
+							"        pm.expect(jsonData[0]).to.have.property(\"id\");\r",
+							"        pm.expect(jsonData[0]).to.have.property(\"name\");\r",
+							"        pm.expect(jsonData[0]).to.have.property(\"location\");\r",
+							"        pm.expect(jsonData[0]).to.have.property(\"totalSpaces\");\r",
+							"        pm.expect(jsonData[0]).to.have.property(\"availableSpaces\");\r",
+							"        pm.expect(jsonData[0]).to.have.property(\"ratePerHour\");\r",
+							"        pm.expect(jsonData[0]).to.have.property(\"facilities\");\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMDY1Mjg1OCwianRpIjoiMzcyY2NmOTUtZDlkOC00YzBhLWI5YzgtZWUwZDc1MGMyZTg3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY3MjdhOWFmNzIyNTY1YTRhYjJkMTgwNSIsIm5iZiI6MTczMDY1Mjg1OCwiY3NyZiI6IjZmNjA2ZGQyLWYxNzQtNDIyMi05NDdhLTgzNjI5MDcyYjJkYSIsImV4cCI6MTczMDY1Mzc1OCwicm9sZSI6ImFkbWluIn0.0eAYfNahZ5o6u8tuUy8SvGeKg_tRjNovTq6ZADuL6n4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/carparks",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carparks"
+					]
+				},
+				"description": "- **Description:** Retrieves a list of all car parks along with their details.\n    \n- **Authorization:** Bearer Token\n    \n- **Token:**\n    \n- **Purpose:** Fetches a list of car parks with information such as location, total spaces, available spaces, rate per hour, and facilities.\n    \n- **Expected Response:** List of car parks with detailed information for each entry."
+			},
+			"response": []
+		},
+		{
+			"name": "add_car_park",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains success message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"message\", \"Carpark added successfully\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Admin access required error\", function () {\r",
+							"    if (pm.response.status === 403) {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData).to.have.property(\"error\", \"Admin access required\");\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMDY1NDU3MSwianRpIjoiM2Y4ZTNkNzUtYWRjYS00ZDYwLThhNmYtZjY4ZmJjZjY4NDU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY3MjdhOWFmNzIyNTY1YTRhYjJkMTgwNSIsIm5iZiI6MTczMDY1NDU3MSwiY3NyZiI6IjU1NGRkMDE3LWFkYmItNDk0OS04N2I2LTZiZWVhZjI4NTBlZCIsImV4cCI6MTczMDY1NTQ3MSwicm9sZSI6ImFkbWluIn0.tQ-_rd7L8UlO7ST1FvzG34lmLMUxR56K8YWynC9Qo8w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Downtown Carpark\",\r\n  \"location\": \"City Center\",\r\n  \"totalSpaces\": 100,\r\n  \"availableSpaces\": 50,\r\n  \"ratePerHour\": 2.5,\r\n  \"facilities\": [\"EV Charging\", \"CCTV\"]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/carparks",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carparks"
+					]
+				},
+				"description": "- **Description:** Adds a new car park to the system.\n    \n- **Authorization:** Bearer Token\n    \n- **Token:**\n    \n- **Purpose:** Creates a new car park entry with details such as the name, location, total parking spaces, available spaces, rate per hour, and available facilities.\n    \n- **Expected Response:** Confirmation message with details of the added car park."
+			},
+			"response": []
+		},
+		{
+			"name": "edit-carpark-by-id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains success message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"message\", \"Carpark updated successfully\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Admin access required error\", function () {\r",
+							"    if (pm.response.status === 403) {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData).to.have.property(\"error\", \"Admin access required\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Carpark not found error\", function () {\r",
+							"    if (pm.response.status === 404) {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData).to.have.property(\"error\", \"Carpark not found\");\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMDY1NDU3MSwianRpIjoiM2Y4ZTNkNzUtYWRjYS00ZDYwLThhNmYtZjY4ZmJjZjY4NDU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY3MjdhOWFmNzIyNTY1YTRhYjJkMTgwNSIsIm5iZiI6MTczMDY1NDU3MSwiY3NyZiI6IjU1NGRkMDE3LWFkYmItNDk0OS04N2I2LTZiZWVhZjI4NTBlZCIsImV4cCI6MTczMDY1NTQ3MSwicm9sZSI6ImFkbWluIn0.tQ-_rd7L8UlO7ST1FvzG34lmLMUxR56K8YWynC9Qo8w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"totalSpaces\": 120,\r\n  \"availableSpaces\": 70\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/carparks/6726e6cd85dfb1c70c216bb9",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carparks",
+						"6726e6cd85dfb1c70c216bb9"
+					]
+				},
+				"description": "- **Description:** Updates information for an existing car park by its unique ID.\n    \n- **Authorization:** Bearer Token\n    \n- **Token:**\n    \n- **Purpose:** Modifies the details of a specific car park, allowing updates to fields such as total spaces and available spaces.\n    \n- **Expected Response:** Confirmation message with updated car park details."
+			},
+			"response": []
+		},
+		{
+			"name": "delete-carpark",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains success message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"message\", \"Carpark deleted successfully\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Admin access required error\", function () {\r",
+							"    if (pm.response.status === 403) {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData).to.have.property(\"error\", \"Admin access required\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Carpark not found error\", function () {\r",
+							"    if (pm.response.status === 404) {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData).to.have.property(\"error\", \"Carpark not found\");\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/carparks/6726e6cd85dfb1c70c216bba",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carparks",
+						"6726e6cd85dfb1c70c216bba"
+					]
+				},
+				"description": "- **Description:** Deletes a car park from the system by its unique ID.\n    \n- **Authorization:** Inherit auth from parent\n    \n- **Purpose:** Removes the specified car park from the system based on its unique ID.\n    \n- **Expected Response:** Confirmation message indicating successful deletion of the car park."
+			},
+			"response": []
+		}
+	]
+}

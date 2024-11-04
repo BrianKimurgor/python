@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "1ffed618-1450-45f6-8529-fb2b8d882399",
+		"name": "book_user_testing",
+		"description": "The `book_user_testing` collection is designed to test user authentication functionalities for a book-related application. It includes endpoints to register new users, attempt duplicate registrations, log in with valid credentials, and test error handling with invalid login attempts. This collection validates both successful and error scenarios for user authentication.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19082081",
+		"_collection_link": "https://orange-trinity-975187.postman.co/workspace/Flask-API~9f5fab2d-9491-477c-aace-9ba8ece60d22/collection/19082081-1ffed618-1450-45f6-8529-fb2b8d882399?action=share&source=collection_link&creator=19082081"
+	},
+	"item": [
+		{
+			"name": "test-invalid-credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// a 401 unauthorized request\r",
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"//correct error message of invalid credentials\r",
+							"pm.test(\"Error message is correct\", function () {\r",
+							"    pm.expect(pm.response.json().error).to.eql(\"Invalid credentials\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"wronguser\",\r\n    \"password\": \"wrongpassword\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "- **Description:** Attempts to log in with incorrect credentials to verify error handling.\n    \n- **Authorization:** None\n    \n- **Purpose:** Ensures the API correctly handles login attempts with invalid credentials, returning an appropriate error response."
+			},
+			"response": []
+		},
+		{
+			"name": "register_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//ensures status code is 201\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"//ensures a correct message response\r",
+							"pm.test(\"Response message is correct\", function () {\r",
+							"    pm.expect(pm.response.json().message).to.eql(\"User registered successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Alex\",\r\n    \"password\": \"2314\",\r\n    \"admin\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				},
+				"description": "- **Description:** Registers a new user in the system.\n    \n- **Authorization:** None\n    \n- **Purpose:** Adds a new user to the system, setting a username, password, and admin status."
+			},
+			"response": []
+		},
+		{
+			"name": "register_with_existing user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//returns a status 400\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"//correct message that user exists\r",
+							"pm.test(\"Error message is correct\", function () {\r",
+							"    pm.expect(pm.response.json().error).to.eql(\"User already exists\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Alex\",\r\n    \"password\": \"2314\",\r\n    \"admin\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				},
+				"description": "- **Description:** Attempts to register a user with an already-existing username.\n    \n- **Authorization:** None\n    \n- **Purpose:** Tests the API’s response to duplicate registrations, verifying that the system enforces unique usernames."
+			},
+			"response": []
+		},
+		{
+			"name": "login_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//ensure a 200 response of user being logged in\r",
+							"pm.test(\"response 200, jwt created\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Alex\",\r\n    \"password\": \"2314\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "- **Description:** Logs in an existing user with correct credentials.\n    \n- **Authorization:** Inherit auth from parent\n    \n- **Purpose:** Authenticates the user by verifying the provided username and password."
+			},
+			"response": []
+		}
+	]
+}

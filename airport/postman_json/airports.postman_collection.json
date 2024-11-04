@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "ee24450c-ecfe-4aa7-8a88-da94bffda3e9",
+		"name": "airports",
+		"description": "The `airports` API provides a set of endpoints for managing airport information, including retrieving a list of airports, adding new airport records, updating existing airport details, and deleting airport entries. This collection requires Bearer Token authorization for specific operations, ensuring secure access for create, update, and delete actions.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19082081",
+		"_collection_link": "https://orange-trinity-975187.postman.co/workspace/Flask-API~9f5fab2d-9491-477c-aace-9ba8ece60d22/collection/19082081-ee24450c-ecfe-4aa7-8a88-da94bffda3e9?action=share&source=collection_link&creator=19082081"
+	},
+	"item": [
+		{
+			"name": "get-list-of-airports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//validate the output to have a 200 ok responce\r",
+							"pm.test(\"status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response is an array\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							"pm.test(\"Each airport has required properties\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    jsonData.forEach(function(airport) {\r",
+							"        pm.expect(airport).to.have.property(\"name\");\r",
+							"        pm.expect(airport).to.have.property(\"location\");\r",
+							"        pm.expect(airport).to.have.property(\"code\");\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/airports",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"airports"
+					]
+				},
+				"description": "Retrieves a list of all available airports in the system.\n\n- **Authorization:** None\n    \n- **Query Parameters:** None\n    \n- **Response:** Returns an array of airport objects, each containing details such as the airport name, location, code, number of gates, terminals, and available facilities."
+			},
+			"response": []
+		},
+		{
+			"name": "add-airport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response has success message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Airport added successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMDY0ODgyNCwianRpIjoiODdhZWE0YzItNTgwYi00NjIwLTg5MDItMjcxZThiOTBkY2YwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY3MjZkZGM3ZTlmN2JlMDdhMTMyNThkNCIsIm5iZiI6MTczMDY0ODgyNCwiY3NyZiI6ImE2YWYxMzc2LTI5YzMtNGQxMi1iOTVhLWQ5MjAwNjk5NDgzYiIsImV4cCI6MTczMDY0OTcyNCwicm9sZSI6ImFkbWluIn0.QWnkjNdRJE47JIsESHe0Ck9VLFjilGtw-7IkkOkmpRU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"John F. Kennedy International Airport\",\r\n    \"location\": \"New York, USA\",\r\n    \"code\": \"JFK\",\r\n    \"gates\": 128,\r\n    \"terminals\": 6,\r\n    \"facilities\": [\"WiFi\", \"Parking\", \"Restaurants\", \"Duty-Free Shops\"]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/airports",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"airports"
+					]
+				},
+				"description": "- **Description:** Adds a new airport to the system with detailed information.\n    \n- **Authorization:** Bearer Token (required)\n    \n- **Headers:**`Authorization: Bearer`\n    \n- **Purpose:** Adds a new airport entry with the specified name, location, airport code, gate count, terminal count, and a list of facilities.\n    \n- **Response:** Returns the details of the newly created airport entry.EndFragment"
+			},
+			"response": []
+		},
+		{
+			"name": "put-airports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response has success message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Airport updated successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMDY1MDI1MywianRpIjoiNmM0Zjc5MTYtMTZiYy00OWI3LTlkMGMtZjJlYjQxYzE4ZjhmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY3MjZkZGM3ZTlmN2JlMDdhMTMyNThkNCIsIm5iZiI6MTczMDY1MDI1MywiY3NyZiI6ImQ0OTVjOTg4LTgxYjctNDI1Yy1iNDU5LTU0ZWRiMGViZDJhNiIsImV4cCI6MTczMDY1MTE1Mywicm9sZSI6ImFkbWluIn0.pifsTSslDfQBwI1qbrtffyR_WTaZYnfmEVbof2eASR8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"gates\": 12,\r\n  \"terminals\": 5\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/airports/6726d1500bcd38b458bf6826",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"airports",
+						"6726d1500bcd38b458bf6826"
+					]
+				},
+				"description": "- **Description:** Updates specific fields of an existing airport.\n    \n- **URL:** `http://127.0.0.1:5000/api/airports/{id}`Replace `{id}` with the airport ID (e.g., `6726d1500bcd38b458bf6826`)\n    \n- **Authorization:** Bearer Token (required)\n    \n- **Headers:**`Authorization: Bearer`\n    \n- **Purpose:** Allows partial updates to the airport’s gate and terminal numbers. This endpoint can be used to modify one or more fields of an existing airport entry.\n    \n- **Response:** Returns the updated details of the airport."
+			},
+			"response": []
+		},
+		{
+			"name": "delete_user_by_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response has success message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Airport deleted successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/airports/6726d1500bcd38b458bf6827",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"airports",
+						"6726d1500bcd38b458bf6827"
+					]
+				},
+				"description": "- **Description:** Deletes an airport from the system by its ID.\n    \n- **URL:** `http://127.0.0.1:5000/api/airports/{id}`Replace `{id}` with the airport ID (e.g., `6726d1500bcd38b458bf6827`)\n    \n- **Authorization:** Inherit auth from parent (requires Bearer Token authorization)\n    \n- **Purpose:** Permanently removes an airport entry from the database by its unique identifier.\n    \n- **Response:** Confirms the deletion of the airport."
+			},
+			"response": []
+		}
+	]
+}

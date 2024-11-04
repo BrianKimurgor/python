@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "f57953bf-0ce9-4609-a2ac-a6c73e7251da",
+		"name": "carpark_user_testing",
+		"description": "The `carpark_user_testing` collection provides a set of endpoints to test user registration and authentication for the car park management system. This includes registration, login, testing invalid login attempts, and handling cases where the user already exists. Each endpoint is designed to facilitate secure user management and access control within the system.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19082081",
+		"_collection_link": "https://orange-trinity-975187.postman.co/workspace/Flask-API~9f5fab2d-9491-477c-aace-9ba8ece60d22/collection/19082081-f57953bf-0ce9-4609-a2ac-a6c73e7251da?action=share&source=collection_link&creator=19082081"
+	},
+	"item": [
+		{
+			"name": "register_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has success message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"message\", \"User registered successfully\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"User already exists error\", function () {\r",
+							"    if (pm.response.status === 400) {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData).to.have.property(\"error\", \"User already exists\");\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"testuser\",\r\n  \"password\": \"passwourd123\",\r\n  \"admin\": true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				},
+				"description": "- **Description:** Registers a new user in the system.\n    \n- **Purpose:** Creates a new user account with specified credentials and role. In this case, the user is an admin.\n    \n- **Expected Response:** Confirmation of successful registration, along with the user's details."
+			},
+			"response": []
+		},
+		{
+			"name": "register-with-existing -user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//returns a status 400\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"//correct message that user exists\r",
+							"pm.test(\"Error message is correct\", function () {\r",
+							"    pm.expect(pm.response.json().error).to.eql(\"User already exists\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"testuser\",\r\n  \"password\": \"passwourd123\",\r\n  \"admin\": true\r\n}get",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				},
+				"description": "- **Description:** Attempts to register a user with a username that already exists in the system.\n    \n- **Purpose:** Tests the system's handling of duplicate registration attempts by using a username that already exists.\n    \n- **Expected Response:** Error message indicating that the username is already taken."
+			},
+			"response": []
+		},
+		{
+			"name": "test-invalid-credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// a 401 unauthorized request\r",
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"//correct error message of invalid credentials\r",
+							"pm.test(\"Error message is correct\", function () {\r",
+							"    pm.expect(pm.response.json().error).to.eql(\"Invalid credentials\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"wronguser\",\r\n    \"password\": \"wrongpassword\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "- **Description:** Attempts to log in with incorrect credentials.\n    \n- **Purpose:** Verifies the system’s response to invalid login credentials.\n    \n- **Expected Response:** Error message indicating invalid username or password."
+			},
+			"response": []
+		},
+		{
+			"name": "login_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains access token\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"access_token\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Invalid credentials error\", function () {\r",
+							"    if (pm.response.status === 401) {\r",
+							"        var jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData).to.have.property(\"error\", \"Invalid credentials\");\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"testuser\",\r\n  \"password\": \"passwourd123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "- **Description:** Logs in a registered user with correct credentials.\n    \n- **Purpose:** Authenticates the user and returns an access token for authorized access.\n    \n- **Expected Response:** Confirmation message with a JWT token or session token to be used for authorized endpoints."
+			},
+			"response": []
+		}
+	]
+}

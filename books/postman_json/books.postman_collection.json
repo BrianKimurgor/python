@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "38afe1be-7e5e-43fe-a645-6ccc4aacb6df",
+		"name": "books",
+		"description": "The `books` collection provides a set of endpoints to manage a library of books within the application. It includes functionality to retrieve all books, add new books, update existing books, and delete books. Each endpoint requires proper authorization using a Bearer Token to ensure secure access.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19082081",
+		"_collection_link": "https://orange-trinity-975187.postman.co/workspace/Flask-API~9f5fab2d-9491-477c-aace-9ba8ece60d22/collection/19082081-38afe1be-7e5e-43fe-a645-6ccc4aacb6df?action=share&source=collection_link&creator=19082081"
+	},
+	"item": [
+		{
+			"name": "get_books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response 200, books retrieved successfully\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.json; // Ensure response is JSON\r",
+							"    pm.expect(pm.response.json()).to.be.an(\"array\"); // Ensure the response is an array\r",
+							"\r",
+							"    pm.response.json().forEach(function(book) {\r",
+							"        pm.expect(book).to.have.property(\"id\").that.is.a(\"string\"); // Check for id\r",
+							"        pm.expect(book).to.have.property(\"title\").that.is.a(\"string\"); // Check for title\r",
+							"        pm.expect(book).to.have.property(\"author\").that.is.an(\"object\"); // Check for author object\r",
+							"        pm.expect(book.author).to.have.property(\"name\").that.is.a(\"string\"); // Check for author's name\r",
+							"        pm.expect(book.author).to.have.property(\"birth_date\").that.is.a(\"string\"); // Check for author's birth date\r",
+							"\r",
+							"        pm.expect(book).to.have.property(\"genre\").that.is.a(\"string\"); // Check for genre\r",
+							"        pm.expect(book).to.have.property(\"publication_year\").that.is.a(\"number\"); // Check for publication year\r",
+							"        pm.expect(book).to.have.property(\"isbn\").that.is.a(\"string\"); // Check for ISBN\r",
+							"        pm.expect(book).to.have.property(\"price\").that.is.a(\"number\"); // Check for price\r",
+							"        pm.expect(book).to.have.property(\"stock_quantity\").that.is.a(\"number\"); // Check for stock quantity\r",
+							"        pm.expect(book).to.have.property(\"pages\").that.is.a(\"number\"); // Check for pages\r",
+							"        pm.expect(book).to.have.property(\"language\").that.is.a(\"string\"); // Check for language\r",
+							"        pm.expect(book).to.have.property(\"publisher\").that.is.an(\"object\"); // Check for publisher object\r",
+							"        pm.expect(book.publisher).to.have.property(\"name\").that.is.a(\"string\"); // Check for publisher's name\r",
+							"        pm.expect(book.publisher).to.have.property(\"location\").that.is.a(\"string\"); // Check for publisher's location\r",
+							"        pm.expect(book.publisher).to.have.property(\"website\").that.is.a(\"string\"); // Check for publisher's website\r",
+							"\r",
+							"        pm.expect(book).to.have.property(\"description\").that.is.a(\"string\"); // Check for description\r",
+							"        pm.expect(book).to.have.property(\"ratings\").that.is.an(\"array\"); // Check for ratings array\r",
+							"        pm.expect(book).to.have.property(\"reviews\").that.is.an(\"array\"); // Check for reviews array\r",
+							"        \r",
+							"        \r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMDY2MjQ1OSwianRpIjoiNmI5MzVjMzUtZTFhYi00MWY3LWJhMmEtMDY5ZDc0YzZmZTUwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY3MjdjZmE3ZmRmNzRkZWJlYmExZWI3ZSIsIm5iZiI6MTczMDY2MjQ1OSwiY3NyZiI6IjVmNzE4ZGRjLWE4NGItNDE1Yy05ZGIyLTMxOWY3ZjAyNzIzNyIsImV4cCI6MTczMDY2MzM1OSwicm9sZSI6InVzZXIifQ.W4jeC61-G0uDHFJaGxD7BaLIz8FBW0OMXHrYk8lSOHQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/books",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"books"
+					]
+				},
+				"description": "- **Description:** Retrieves a list of all books available in the library.\n    \n- **Authorization:** Bearer Token\n    \n- **Token:**\n    \n- **Purpose:** Fetches all books with details such as title, author, genre, publication year, ISBN, price, stock quantity, pages, language, publisher, and description."
+			},
+			"response": []
+		},
+		{
+			"name": "add_book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response 201, book added successfully\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.json; // Ensure response is JSON\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"message\", \"Book added successfully\");\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"book_id\").that.is.a(\"string\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMDY2NDQ4NCwianRpIjoiYjVkN2VjYzgtYjNlZi00N2E1LWE4ZDAtNTExMzc3NDEyZTZmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY3MjdkNWQ5NzUwMjUzOGIxMjZmMTZjMSIsIm5iZiI6MTczMDY2NDQ4NCwiY3NyZiI6Ijk1ODYzZDkyLWQ0MmMtNDAwYi04NzE5LTNhYzFkNWFjZmE3NyIsImV4cCI6MTczMDY2NTM4NCwicm9sZSI6InVzZXIifQ.6K4kaHJRIR4ooNBVt7pdLZrFLC6wEy4Y6nJvqGjAnNI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"New Book Title\",\r\n    \"author\": {\r\n        \"name\": \"Author Name\",\r\n        \"birth_date\": \"1980-01-01\"\r\n    },\r\n    \"genre\": \"Fiction\",\r\n    \"publication_year\": 2024,\r\n    \"isbn\": \"1234567890\",\r\n    \"price\": 19.99,\r\n    \"stock_quantity\": 100,\r\n    \"pages\": 300,\r\n    \"language\": \"English\",\r\n    \"publisher\": {\r\n        \"name\": \"Publisher Name\",\r\n        \"location\": \"Publisher Location\",\r\n        \"website\": \"https://publisher-website.com\"\r\n    },\r\n    \"description\": \"A brief description of the book.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/books",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"books"
+					]
+				},
+				"description": "- **Description:** Adds a new book to the library collection.\n    \n- **Authorization:** Bearer Token\n    \n- **Token:**\n    \n- **Purpose:** Creates a new book entry in the library, including detailed metadata such as author information, publication details, and stock information.\n    \n- **Expected Response:** Confirmation message with details of the added book."
+			},
+			"response": []
+		},
+		{
+			"name": "update_book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response 200, book updated successfully\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.json; // Ensure response is JSON\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"message\", \"Book updated successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMDY2NDQ4NCwianRpIjoiYjVkN2VjYzgtYjNlZi00N2E1LWE4ZDAtNTExMzc3NDEyZTZmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjY3MjdkNWQ5NzUwMjUzOGIxMjZmMTZjMSIsIm5iZiI6MTczMDY2NDQ4NCwiY3NyZiI6Ijk1ODYzZDkyLWQ0MmMtNDAwYi04NzE5LTNhYzFkNWFjZmE3NyIsImV4cCI6MTczMDY2NTM4NCwicm9sZSI6InVzZXIifQ.6K4kaHJRIR4ooNBVt7pdLZrFLC6wEy4Y6nJvqGjAnNI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Updated Book Title\",\r\n    \"author\": {\r\n        \"name\": \"Updated Author Name\",\r\n        \"birth_date\": \"1980-01-01\"\r\n    },\r\n    \"genre\": \"Updated Genre\",\r\n    \"publication_year\": 2024,\r\n    \"isbn\": \"1234567890123\",\r\n    \"price\": 19.99,\r\n    \"stock_quantity\": 50,\r\n    \"pages\": 300,\r\n    \"language\": \"English\",\r\n    \"publisher\": {\r\n        \"name\": \"Updated Publisher Name\",\r\n        \"location\": \"New York, NY\",\r\n        \"website\": \"https://www.updatedpublisher.com\"\r\n    },\r\n    \"description\": \"Updated description of the book.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/books/672400299c8c9cebe78f42fa",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"books",
+						"672400299c8c9cebe78f42fa"
+					]
+				},
+				"description": "- **Description:** Updates information for an existing book.\n    \n- **Authorization:** Bearer Token\n    \n- **Token:**\n    \n- **Purpose:** Modifies the details of a book, identified by its unique ID, allowing updates to fields such as title, author, genre, and publication information.\n    \n- **Expected Response:** Confirmation message with updated book details."
+			},
+			"response": []
+		},
+		{
+			"name": "delete_book",
+			"request": {
+				"auth": {
+					"type": "inherit"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/books/672400299c8c9cebe78f42fa",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"books",
+						"672400299c8c9cebe78f42fa"
+					]
+				},
+				"description": "- **Description:** Deletes a book from the library collection.\n    \n- **Authorization:** Inherit auth from parent\n    \n- **Purpose:** Removes the specified book from the library based on its unique ID.\n    \n- **Expected Response:** Confirmation message indicating successful deletion of the book."
+			},
+			"response": []
+		}
+	]
+}

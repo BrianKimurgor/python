@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "af408642-4cd8-4f55-9aee-54951952a929",
+		"name": "airport_user-testing",
+		"description": "The `airport_user-testing` collection is used for testing user authentication and registration endpoints within the airport user management API. It includes endpoints to register a new user, login with credentials, handle duplicate registrations, and test login with invalid credentials. This collection helps ensure that authentication processes work as expected, covering both valid and error scenarios.EndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19082081",
+		"_collection_link": "https://orange-trinity-975187.postman.co/workspace/Flask-API~9f5fab2d-9491-477c-aace-9ba8ece60d22/collection/19082081-af408642-4cd8-4f55-9aee-54951952a929?action=share&source=collection_link&creator=19082081"
+	},
+	"item": [
+		{
+			"name": "register_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//ensures status code is 201\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"//ensures a correct message response\r",
+							"pm.test(\"Response message is correct\", function () {\r",
+							"    pm.expect(pm.response.json().message).to.eql(\"User registered successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Brian\",\r\n    \"password\": \"234\",\r\n    \"admin\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				},
+				"description": "- Registers a new user in the system.\n    \n- **Purpose:** Creates a new user account with a specified username and password, with an option to designate admin rights."
+			},
+			"response": []
+		},
+		{
+			"name": "login-user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//ensure a 200 response of user being logged in\r",
+							"pm.test(\"response 200, jwt created\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"brian\",\r\n    \"password\": \"1234\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "- Authenticates an existing user by validating their credentials.\n    \n- **Purpose:** Logs in the user if the username and password match a registered user."
+			},
+			"response": []
+		},
+		{
+			"name": "register-with-existing -user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//returns a status 400\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"//correct message that user exists\r",
+							"pm.test(\"Error message is correct\", function () {\r",
+							"    pm.expect(pm.response.json().error).to.eql(\"User already exists\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Brian\",\r\n    \"password\": \"234\",\r\n    \"admin\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				},
+				"description": "- Attempts to register a user with a username that already exists in the system.\n    \n- Tests the API's handling of duplicate user registrations to ensure it does not allow two users with the same username."
+			},
+			"response": []
+		},
+		{
+			"name": "test-invalid-credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// a 401 unauthorized request\r",
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"//correct error message of invalid credentials\r",
+							"pm.test(\"Error message is correct\", function () {\r",
+							"    pm.expect(pm.response.json().error).to.eql(\"Invalid credentials\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"wronguser\",\r\n    \"password\": \"wrongpassword\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "- Attempts to login with incorrect credentials.\n    \n- Validates that the system properly rejects invalid login attempts and returns the correct error response."
+			},
+			"response": []
+		}
+	]
+}
